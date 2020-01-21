@@ -72,7 +72,7 @@ const {isUndefined, forEach, CustomEvents} = snippet;
  * });
  */
 class ImageEditor {
-    constructor(wrapper, options) {
+    constructor(wrapper, options, actions) {
         options = snippet.extend({
             includeUI: false,
             usageStatistics: true
@@ -90,7 +90,18 @@ class ImageEditor {
             const UIOption = options.includeUI;
             UIOption.usageStatistics = options.usageStatistics;
 
-            this.ui = new UI(wrapper, UIOption, this.getActions());
+            const act = this.getActions();
+            if (actions) {
+                // eslint-disable-next-line guard-for-in
+                for (const group in actions) {
+                    // eslint-disable-next-line guard-for-in,max-depth
+                    for (const k in actions[group]) {
+                        act[group][k] = actions[group][k];
+                    }
+                }
+            }
+
+            this.ui = new UI(wrapper, UIOption, act);
             options = this.ui.setUiDefaultSelectionStyle(options);
         }
 

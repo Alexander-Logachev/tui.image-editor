@@ -233,14 +233,14 @@ declare namespace tuiImageEditor {
         height?: string;
         width?: string;
     }
-    
+
     interface IImageDimension {
         oldHeight?: number;
         oldWidth?: number;
         newHeight?: number;
         newWidth?: number;
     }
-    
+
     interface IEditorSize {
         uiSize?: IUIDimension,
         imageSize?: IImageDimension
@@ -251,7 +251,7 @@ declare namespace tuiImageEditor {
     }
 
     class ImageEditor {
-        constructor(wrapper: string | Element, options: IOptions);
+        constructor(wrapper: string | Element, options: IOptions, actions);
         public ui: UI;
 
         public addIcon(type: string, options?: IIconOptions): Promise<IObjectProps>;
